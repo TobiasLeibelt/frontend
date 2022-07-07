@@ -18,9 +18,9 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Anzahl Projekte</p>
                     <h5 class="font-weight-bolder mb-0">
-                      14
+                      {{ data.number_projects }}
 
-                      <span class="text-success text-sm font-weight-bolder">+60%</span>
+                      <span class="text-success text-sm font-weight-bolder">{{ "+" if data.percent_rise_projects >= 0 else "-" }}{{ data.percent_rise_projects }}%</span>
 
                     </h5>
                   </div>
@@ -139,7 +139,7 @@
               <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                 <h5 class="text-white font-weight-bolder mb-4 pt-2">Hinweis für Externe</h5>
                 <p class="text-white">Das WISO-Forschungsdashboard enthält kein vollständiges Abbild der Forschungsleistungen der WISO, sondern es werden nur Inhalte dargestellt, welche für die Veröffentlichung im Forschungsportal freigegeben wurden.</p>
-              
+
                 </a>
               </div>
             </div>
@@ -307,7 +307,6 @@
                 </div>
               </div>
             </div>
-
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
                 <table class="table align-items-center mb-0">
@@ -641,7 +640,7 @@
 
 {% endblock content %}
 
-<!-- Specific JS goes HERE --> 
+<!-- Specific JS goes HERE -->
 {% block javascripts %}
 
   <script src="{{ config.ASSETS_ROOT }}/js/plugins/perfect-scrollbar.min.js"></script>
