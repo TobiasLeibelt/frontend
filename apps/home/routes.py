@@ -10,10 +10,25 @@ from jinja2 import TemplateNotFound
 
 
 @blueprint.route('/index')
+@blueprint.route('/index.html')
 @login_required
 def index():
+    # dummy data
+    data = {}
 
-    return render_template('home/index.html', segment='index')
+    data["number_projects"] = 42
+    data["percent_rise_projects"] = 43
+
+    data["number_publications"] = 420
+    data["percent_rise_publications"] = 69
+
+    data["number_cooperations"] = 100
+    data["percent_rise_cooperations"] = 10
+
+    data["number_patents"] = 1337
+    data["percent_rise_patents"] = 5
+
+    return render_template('home/index.html', data=data)
 
 
 @blueprint.route('/<template>')
