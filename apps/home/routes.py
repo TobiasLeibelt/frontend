@@ -9,38 +9,165 @@ from flask_login import login_required
 from jinja2 import TemplateNotFound
 
 
+from backend.xml_script import XMLProcessing, URLs
+
+
 @blueprint.route('/index')
+@blueprint.route('/index.html')
 @login_required
 def index():
+    # dummy data
+    data = {}
 
-    return render_template('home/index.html', segment='index')
+    data["number_projects"] = 42
+    data["percent_rise_projects"] = 43
+
+    data["number_publications"] = 420
+    data["percent_rise_publications"] = 69
+
+    data["number_cooperations"] = 100
+    data["percent_rise_cooperations"] = 10
+
+    data["number_patents"] = 1337
+    data["percent_rise_patents"] = 5
+
+    return render_template('home/index.html', data=data)
 
 
-@blueprint.route('/<template>')
+@blueprint.route('/tables')
+@blueprint.route('/tables.html')
 @login_required
-def route_template(template):
+def tables():
+    research_projects = []
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
+    research_projects.append(
+        {"title": "Zukunftsforschung im Supply Chain Management", "project_leader": "Christoph Küffner",
+         "funder": "Dr. Hans Riegel-Stiftung", "project_start": "04.05.2022"})
+    research_projects.append({"title": "Nürnberg und der globale Süden", "project_leader": "Prof. Dr. Simone Derix",
+                              "funder": "BMBF / Verbundprojekt", "project_start": "01.10.2022"})
 
-    try:
+    publications = []
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
+    publications.append({"title": "The Non-Stop Disjoint Trajectories Problem", "author": "Hoch B, Liers F, Neumann S", "publish_year": 2020, "language": "Englisch"})
+    publications.append({"title": "Optimal actuator design via Brunovsky’s normal form", "author": "Geshkovski B, Zuazua Iriondo E", "publish_year": 2021, "language": "Englisch"})
 
-        if not template.endswith('.html'):
-            template += '.html'
+    #xml_data_all_wiso_publs = XMLProcessing.get_xml_data(xml_url=URLs["ALL_WISO_PUBLICATIONS"])
+    #selected_attributes = ["cfTitle", "publYear", "srcAuthors", "Language"]  #TODO: "Language" not working correcty -> XML
+    #filtered_data_all_wiso_publs = XMLProcessing.get_wanted_data_from_data_object(xml_data_all_wiso_publs,
+    #                                                                              selected_attributes)
 
-        # Detect the current page
-        segment = get_segment(request)
+    return render_template("home/tables.html",
+                           research_projects=research_projects,
+                           publications=publications)
 
-        # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment)
 
-    except TemplateNotFound:
-        return render_template('home/page-404.html'), 404
-
-    except:
-        return render_template('home/page-500.html'), 500
+# @blueprint.route('/<template>')
+# @login_required
+# def route_template(template):
+#
+#     try:
+#
+#         if not template.endswith('.html'):
+#             template += '.html'
+#
+#         # Detect the current page
+#         segment = get_segment(request)
+#
+#         # Serve the file (if exists) from app/templates/home/FILE.html
+#         return render_template("home/" + template)
+#
+#     except TemplateNotFound:
+#         return render_template('home/page-404.html'), 404
+#
+#     except:
+#         return render_template('home/page-500.html'), 500
 
 
 # Helper - Extract current page name from request
 def get_segment(request):
-
     try:
 
         segment = request.path.split('/')[-1]
