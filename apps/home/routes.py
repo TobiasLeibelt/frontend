@@ -13,7 +13,7 @@ from jinja2 import TemplateNotFound
 
 @blueprint.route('/index')
 @blueprint.route('/index.html')
-@login_required
+
 def index():
     filtered_data_all_wiso_publs = []
     filtered_data_all_wiso_publs.append(
@@ -1850,7 +1850,7 @@ def index():
 
 @blueprint.route('/tables')
 @blueprint.route('/tables.html')
-@login_required
+
 def tables():
     filtered_data_all_wiso_publs = []
     filtered_data_all_wiso_publs.append(
@@ -3691,7 +3691,7 @@ def tables():
 
 @blueprint.route('/tables2')
 @blueprint.route('/tables2.html')
-@login_required
+
 def tables2():
     filtered_data_all_wiso_publs = []
     filtered_data_all_wiso_publs.append(
